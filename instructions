@@ -1,0 +1,29 @@
+build an image (with name <img_name>) from this Dockerfile in same path (tem um ponto no final do comando) #pode passar o caminho também ./src/
+#FROM python:3 carrega uma imagem á predefinida com python3
+docker build -t <img_name> .
+
+
+sudo docker rm python-barcode
+sudo docker build -t python-barcode .
+sudo docker run python-barcode
+
+
+docker run -it --rm -v $(pwd)/data:/data python-barcode
+
+#Não deixar arquivos garndes junto com o código porque ele vai levar os dados para o container (o que é lento)
+#Chamando assim sudo docker run -it --rm -v $(pwd)/data:/data python-barcode2 a pasta fica compartilhada entre  o container e a máquina
+
+#para compartilhar a pasta /data com o container
+sudo docker run -it --rm -v $(pwd)/data:/data python-barcode
+#para compartilhar mais de uma pasta com o container
+sudo docker run -it --rm -v $(pwd)/data:/data -v $(pwd)/data2:/data2 python-barcode
+
+
+#Não testei ainda
+Retrieve the Image ID using docker images (The Image IDs should be in the third column.)
+Run docker rmi <image_id>
+
+to connect interactively to the container and browse the files there if you do not need them permanently.
+docker exec -it <containerIdOrName> bash
+
+docker exec -it python-barcode bash
